@@ -26,7 +26,7 @@ class Blogs {
             String[] data = currentLine.split("\t");
             Blog blog = new Blog(data[0]);
             for (int i = 1; i < words.length; i++) {
-                blog.addWord(words[i], Integer.valueOf(data[i]));
+                blog.addWord(words[i], Integer.parseInt(data[i]));
             }
             blogs.add(blog);
         }
