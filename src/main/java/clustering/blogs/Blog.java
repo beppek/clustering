@@ -3,18 +3,22 @@ package clustering.blogs;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Blog {
+class Blog {
     private String title;
-    Map<String, Double> wordFrequencies = new HashMap<>();
+    private Map<String, Integer> wordFrequencies = new HashMap<>();
     Blog(String title) {
         this.title = title;
     }
 
-    public String getTitle() {
+    String getTitle() {
         return title;
     }
 
-    public void addWord(String word, Double frequency) {
+    Map<String, Integer> getWordFrequencies() {
+        return wordFrequencies;
+    }
+
+    void addWord(String word, Integer frequency) {
         wordFrequencies.put(word, frequency);
     }
 }

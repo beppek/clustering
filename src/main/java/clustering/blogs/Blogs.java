@@ -25,16 +25,10 @@ class Blogs {
         while ((currentLine = br.readLine()) != null) {
             String[] data = currentLine.split("\t");
             Blog blog = new Blog(data[0]);
+            for (int i = 1; i < words.length; i++) {
+                blog.addWord(words[i], Integer.valueOf(data[i]));
+            }
             blogs.add(blog);
-//            for (int i = 0; i < currentLine.length(); i++) {
-//                char c = currentLine.charAt(i);
-//                if (c == '\t') {
-//                    items.add(sb.toString());
-//                    sb.setLength(0);
-//                } else {
-//                    sb.append(c);
-//                }
-//            }
         }
         return blogs;
     }
