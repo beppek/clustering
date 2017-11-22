@@ -1,4 +1,4 @@
-package clustering.blogs;
+package clustering.common;
 
 public class Pearson {
     public double calculate(Article a, Article b) {

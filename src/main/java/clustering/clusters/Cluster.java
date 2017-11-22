@@ -1,6 +1,7 @@
 package clustering.clusters;
 
-import clustering.blogs.*;
+import clustering.common.Article;
+import clustering.common.Word;
 
 public class Cluster {
     String vec;

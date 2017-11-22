@@ -1,4 +1,4 @@
-package clustering.blogs;
+package clustering.common;
 
 public class Word {
     private String word;
