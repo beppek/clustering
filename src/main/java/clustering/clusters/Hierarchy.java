@@ -13,20 +13,27 @@ public class Hierarchy {
 
     public Hierarchy(List<Article> a) {
         articles = a;
+        init();
     }
 
     public List<Cluster> getClusters() {
         return clusters;
     }
 
+    public void generate() {
+        while (clusters.size() > 1) {
+            iterate();
+        }
+    }
+
     private void init() {
-        clusters = new ArrayList<>();
+        clusters = new ArrayList<Cluster>();
         for (Article a : articles) {
             clusters.add(new Cluster(a));
         }
     }
 
-    public void iterate() {
+    private void iterate() {
         double closest = Double.MAX_VALUE;
         Cluster bestA = null;
         Cluster bestB = null;
