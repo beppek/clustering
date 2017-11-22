@@ -1,5 +1,7 @@
 package clustering.blogs;
 
+import clustering.common.Article;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -8,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Blogs {
-    List<Blog> blogs = new ArrayList<>();
+    List<Article> blogs = new ArrayList<>();
 
     /**
      * Reads the blogdata.txt file
      * */
-    public List<Blog> readBlogData() throws IOException {
+    public List<Article> readBlogData() throws IOException {
         File file = new File("data/blogdata.txt");
         FileReader reader = new FileReader(file);
         BufferedReader br = new BufferedReader(reader);
@@ -33,7 +35,7 @@ class Blogs {
         return blogs;
     }
 
-    public List<Blog> getBlogs() {
+    public List<Article> getBlogs() {
         return blogs;
     }
 }
