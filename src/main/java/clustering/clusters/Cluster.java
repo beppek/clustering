@@ -4,13 +4,11 @@ import clustering.common.Article;
 import clustering.common.Word;
 
 public class Cluster {
-    String vec;
-    Cluster parent;
-    Cluster left;
-    Cluster right;
-    double distance;
-    Article article;
-    String id;
+    private Cluster parent;
+    private Cluster left = null;
+    private Cluster right = null;
+    private double distance;
+    private Article article;
 
     Cluster() {
 
@@ -24,20 +22,27 @@ public class Cluster {
 
     }
 
-    void setVec(String vec) {
-        this.vec = vec;
-    }
-
-    String getVec() {
-        return this.vec;
-    }
-
     void setParent(Cluster p) {
         this.parent = p;
     }
 
+    public Cluster getLeft() {
+        return left;
+    }
+
+    public boolean hasLeft() {
+        return left != null;
+    }
     void setLeft(Cluster left) {
         this.left = left;
+    }
+
+    public Cluster getRight() {
+        return right;
+    }
+
+    public boolean hasRight() {
+        return right != null;
     }
 
     void setRight(Cluster right) {
@@ -48,16 +53,16 @@ public class Cluster {
         this.distance = distance;
     }
 
-    Article getArticle() {
+    public Article getArticle() {
         return this.article;
+    }
+
+    public double getDistance() {
+        return distance;
     }
 
     void setArticle(Article a) {
         this.article = a;
-    }
-
-    void setId(String id) {
-        this.id = id;
     }
 
     Cluster merge(Cluster oc, double distance) {
@@ -79,5 +84,10 @@ public class Cluster {
         p.setDistance(distance);
 
         return p;
+    }
+
+    @Override
+    public String toString() {
+        return article.getTitle();
     }
 }
