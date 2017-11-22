@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Article {
     private String title;
-    private List<Word> words = new ArrayList<>();
+    private List<Word> words = new ArrayList<Word>();
 
     public Article(String title) {
         this.title = title;
