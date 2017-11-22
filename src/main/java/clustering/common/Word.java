@@ -16,4 +16,8 @@ public class Word {
     public double getCount() {
         return count;
     }
+
+    public void setCount(double c) {
+        this.count = c;
+    }
 }
