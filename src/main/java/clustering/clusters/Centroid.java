@@ -2,15 +2,33 @@ package clustering.clusters;
 
 import clustering.common.Article;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-class Centroid {
+public class Centroid {
 
     private Article article;
-    private List<Article> cluster;
+    private Set<Article> prevCluster;
+    private Set<Article> cluster;
 
     Centroid(Article a) {
         article = a;
+        cluster = new HashSet<>();
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public Set<Article> getCluster() {
+        return cluster;
+    }
+
+    void saveLast() {
+        prevCluster = cluster;
+        cluster = new HashSet<>();
     }
 
     void addArticle(Article a) {
@@ -29,6 +47,6 @@ class Centroid {
     }
 
     boolean matchesPreviousAssignment() {
-        return false;
+        return prevCluster.containsAll(cluster);
     }
 }
