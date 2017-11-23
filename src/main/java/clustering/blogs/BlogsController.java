@@ -1,15 +1,14 @@
 package clustering.blogs;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import clustering.clusters.Cluster;
 import clustering.clusters.Hierarchy;
 import clustering.clusters.KMeans;
-import clustering.common.Article;
+import clustering.common.HTMLBuilder;
 import clustering.common.TreeBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class BlogsController {
 
     @RequestMapping("/kmeans")
-    public String kClusters() {
+    public String kClusters(@RequestParam(value="k", defaultValue = "4") String stringK) {
+        int k = Integer.parseInt(stringK);
         Blogs blogs = new Blogs();
         try {
             blogs.readBlogData();
@@ -25,8 +25,10 @@ public class BlogsController {
             e.printStackTrace();
         }
         KMeans kMeans = new KMeans(blogs.getBlogs());
-        kMeans.generate(4);
-        return "Not yet";
+        kMeans.generate(k);
+        HTMLBuilder builder = new HTMLBuilder();
+        String html = builder.buildKMeansHTML(kMeans.getCentroids());
+        return html;
     }
 
     @RequestMapping("/hierarchy")
