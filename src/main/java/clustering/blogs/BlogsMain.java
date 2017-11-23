@@ -23,16 +23,18 @@ public class BlogsMain {
             e.printStackTrace();
         }
         kmeans(blogs);
-//        hierarchy(blogs);
+        hierarchy(blogs);
     }
 
     private static void kmeans(Blogs blogs) {
         KMeans kMeans = new KMeans(blogs.getBlogs());
         kMeans.generate(4);
         List<Centroid> centroids = kMeans.getCentroids();
-        int i = 0;
+        int i = 1;
         for (Centroid c : centroids) {
+            System.out.println();
             System.out.println("Centroid nr: " + i++ + " randomly created from " + c.getArticle().getTitle());
+            System.out.println();
             for (Article a : c.getCluster()) {
                 System.out.println(a.getTitle());
             }
@@ -42,7 +44,7 @@ public class BlogsMain {
     private static void hierarchy(Blogs blogs) {
         Hierarchy h = new Hierarchy(blogs.getBlogs());
         h.generate();
-        Cluster root = h.getClusters().get(0);
+        Cluster root = h.getRoot();
         TreeBuilder tb = new TreeBuilder(root);
         JTree tree = tb.buildJTree();
         JFrame frame = new JFrame();
