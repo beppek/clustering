@@ -9,15 +9,20 @@ import java.util.List;
 public class Hierarchy {
     private List<Cluster> clusters;
     private List<Article> articles;
-    private Pearson pearson = new Pearson();
+    private Pearson pearson;
 
     public Hierarchy(List<Article> a) {
         articles = a;
+        pearson = new Pearson();
         init();
     }
 
     public List<Cluster> getClusters() {
         return clusters;
+    }
+
+    public Cluster getRoot() {
+        return clusters.get(0);
     }
 
     public void generate() {
