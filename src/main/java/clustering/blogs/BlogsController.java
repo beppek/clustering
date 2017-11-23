@@ -43,7 +43,6 @@ public class BlogsController {
         h.generate();
         Cluster root = h.getClusters().get(0);
         TreeBuilder tb = new TreeBuilder(root);
-        String htmlTree = tb.buildHTMLTree();
-        return htmlTree;
+        return tb.buildHTMLTree();
     }
 }
