@@ -16,7 +16,7 @@ public class TreeBuilder {
     }
 
     public String buildHTMLTree() {
-        html = new ArrayList<>();
+        html = new ArrayList<String>();
         html.add("<ul>");
         html.add("</ul>");
 
