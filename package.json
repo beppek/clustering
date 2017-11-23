@@ -1,0 +1,9 @@
+{
+    "name": "clustering",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+      "start": "cd src/main/javascript/clustering && npm start",
+      "install": "cd src/main/javascript/clustering && npm install"
+    }
+  }

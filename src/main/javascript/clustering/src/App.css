@@ -1,0 +1,20 @@
+.App-header {
+  text-align: center;
+  background-color: #95bbc72e;
+  height: 50px;
+  padding: 10px;
+  color: #232f39;
+}
+
+.menu-item {
+  display: inline-block;
+  padding: 10px;
+  background: #88c0d04d;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background: #40849c;
+  color: #d9e6eb;
+}
