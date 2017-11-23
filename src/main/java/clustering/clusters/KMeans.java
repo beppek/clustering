@@ -21,7 +21,7 @@ public class KMeans {
     }
 
     public void generate(int k) {
-        centroids = new ArrayList<>();
+        centroids = new ArrayList<Centroid>();
         Randomizer rnd = new Randomizer(articles);
         for (int i = 0; i < k; i++) {
             centroids.add(rnd.createRandom());
@@ -35,14 +35,10 @@ public class KMeans {
             for (Centroid c : centroids) {
                 c.recalcCenter();
                 if (!c.matchesPreviousAssignment()) {
-//                    System.out.println("Didn't match");
                     done = false;
-                } else {
-                    System.out.println("Matched");
                 }
             }
             cnt++;
-//            System.out.println(cnt);
         }
         System.out.println("Iterations: " + cnt + ", Centroids: " + centroids.size() + "\n\n");
     }
@@ -50,11 +46,11 @@ public class KMeans {
     private void iterate() {
         resetCentroids();
         for (Article a : articles) {
-            double bestScore = 0.0;
+            double bestScore = Double.MAX_VALUE;
             Centroid bestMatch = centroids.get(0);
             for (Centroid c : centroids) {
                 double score = pearson.calculate(c.getArticle(), a);
-                if (score > bestScore) {
+                if (score < bestScore) {
                     bestMatch = c;
                     bestScore = score;
                 }
@@ -66,13 +62,6 @@ public class KMeans {
     private void resetCentroids() {
         for (Centroid c : centroids) {
             c.saveLast();
-        }
-    }
-
-    private void printCentroid(Centroid c) {
-        int i = 0;
-        for (Article a : c.getCluster()) {
-            System.out.println(i++);
         }
     }
 }
