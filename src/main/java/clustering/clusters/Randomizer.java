@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Random;
 
 class Randomizer {
-    private List<Article> articles = new ArrayList<Article>();
+    private List<Article> articles;
 
     Randomizer(List<Article> a) {
-        articles = a;
+        articles = new ArrayList<>(a);
     }
 
     Centroid createRandom() {
