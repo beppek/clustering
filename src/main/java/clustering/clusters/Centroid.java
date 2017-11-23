@@ -2,9 +2,7 @@ package clustering.clusters;
 
 import clustering.common.Article;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Centroid {
@@ -15,7 +13,7 @@ public class Centroid {
 
     Centroid(Article a) {
         article = a;
-        cluster = new HashSet<>();
+        cluster = new HashSet<Article>();
     }
 
     public Article getArticle() {
@@ -28,7 +26,7 @@ public class Centroid {
 
     void saveLast() {
         prevCluster = cluster;
-        cluster = new HashSet<>();
+        cluster = new HashSet<Article>();
     }
 
     void addArticle(Article a) {
