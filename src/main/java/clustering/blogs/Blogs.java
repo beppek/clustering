@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Blogs {
-    List<Article> blogs = new ArrayList<>();
+    private List<Article> blogs = new ArrayList<Article>();
 
     /**
      * Reads the blogdata.txt file
      * */
-    public List<Article> readBlogData() throws IOException {
+    void readBlogData() throws IOException {
         File file = new File("data/blogdata.txt");
         FileReader reader = new FileReader(file);
         BufferedReader br = new BufferedReader(reader);
@@ -32,10 +32,9 @@ class Blogs {
             }
             blogs.add(blog);
         }
-        return blogs;
     }
 
-    public List<Article> getBlogs() {
+    List<Article> getBlogs() {
         return blogs;
     }
 }
