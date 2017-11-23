@@ -10,7 +10,7 @@ import java.util.List;
 public class FileHandler {
 
     public List<Article> readFileData(String path) throws IOException {
-        List<Article> articles = new ArrayList<>();
+        List<Article> articles = new ArrayList<Article>();
         File file = new File(path);
         FileReader reader = new FileReader(file);
         BufferedReader br = new BufferedReader(reader);

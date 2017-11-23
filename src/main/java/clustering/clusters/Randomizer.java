@@ -10,7 +10,7 @@ class Randomizer {
     private List<Article> articles;
 
     Randomizer(List<Article> a) {
-        articles = new ArrayList<>(a);
+        articles = new ArrayList<Article>(a);
     }
 
     Centroid createRandom() {
