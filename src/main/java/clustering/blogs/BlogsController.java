@@ -7,11 +7,13 @@ import clustering.clusters.Hierarchy;
 import clustering.clusters.KMeans;
 import clustering.common.HTMLBuilder;
 import clustering.common.TreeBuilder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin()
 @RequestMapping("/blogs")
 public class BlogsController {
 
