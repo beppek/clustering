@@ -1,11 +1,7 @@
 package clustering.common;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 public class FileHandler {
 
@@ -28,6 +24,56 @@ public class FileHandler {
             articles.add(a);
         }
         return articles;
+    }
+
+    public void createWikiDataFile() throws IOException {
+        File dataFile = new File("data/wikidata.txt");
+        if (!dataFile.exists()) {
+            dataFile.createNewFile();
+        }
+        FileWriter fw = new FileWriter(dataFile.getAbsoluteFile());
+        BufferedWriter bw = new BufferedWriter(fw);
+        File dir = new File("data/wiki/");
+        File[] subs = dir.listFiles();
+        List<File> files = new ArrayList<>();
+        List<Article> articles = new ArrayList<Article>();
+        WordFrequencyMap allWords = new WordFrequencyMap();
+        for (File s : subs) {
+            Collections.addAll(files, s.listFiles());
+        }
+
+        for (File f : files) {
+            Article a = new Article(extractArticleName(f.getName()));
+            FileReader reader = new FileReader(f);
+            BufferedReader br = new BufferedReader(reader);
+            String currentLine;
+            WordFrequencyMap wordCount = new WordFrequencyMap();
+            while ((currentLine = br.readLine()) != null) {
+                String[] words = currentLine.split(" ");
+                for (int i = 1; i < words.length; i++) {
+                    String word = words[i];
+                    wordCount.addWord(word, 1);
+                }
+            }
+            for (String w : wordCount.getWords()) {
+                a.addWord(w, wordCount.get(w));
+                allWords.addWord(w, wordCount.get(w));
+            }
+            articles.add(a);
+        }
+        bw.write("Articles ");
+        System.out.println(allWords.getHighestWordCount());
+        for (String word : allWords.getWords()) {
+            bw.write(word + "\t");
+        }
+        bw.newLine();
+
+        bw.close();
+    }
+
+    private String extractArticleName(String filename) {
+        String[] name = filename.split("\\.");
+        return name[0].replaceAll("_+", " ");
     }
 
 }
