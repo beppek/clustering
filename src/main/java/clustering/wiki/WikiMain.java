@@ -1,11 +1,13 @@
 package clustering.wiki;
 
 import clustering.clusters.Centroid;
+import clustering.clusters.Cluster;
+import clustering.clusters.Hierarchy;
 import clustering.clusters.KMeans;
 import clustering.common.Article;
-import clustering.common.HTMLBuilder;
-import org.springframework.web.bind.annotation.RequestParam;
+import clustering.common.TreeBuilder;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -14,11 +16,12 @@ public class WikiMain {
         WikiPages pages = new WikiPages();
         try {
             pages.createWordFrequencyFile();
-//            pages.readWikiData();
+            pages.readWikiData();
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        kmeans(pages);
+        kmeans(pages);
+        hierarchy(pages);
     }
 
     private static void kmeans(WikiPages pages) {
@@ -35,5 +38,20 @@ public class WikiMain {
                 System.out.println(a.getTitle());
             }
         }
+    }
+
+    private static void hierarchy(WikiPages pages) {
+        Hierarchy h = new Hierarchy(pages.getPages());
+        h.generate();
+        Cluster root = h.getRoot();
+        TreeBuilder tb = new TreeBuilder(root);
+        JTree tree = tb.buildJTree();
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JScrollPane scrollPane = new JScrollPane(tree);
+        frame.add(scrollPane);
+
+        frame.setSize(300, 200);
+        frame.setVisible(true);
     }
 }
