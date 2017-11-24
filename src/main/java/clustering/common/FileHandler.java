@@ -1,5 +1,7 @@
 package clustering.common;
 
+import clustering.wiki.WikiPage;
+
 import java.io.*;
 import java.util.*;
 
@@ -23,6 +25,8 @@ public class FileHandler {
             }
             articles.add(a);
         }
+        br.close();
+        reader.close();
         return articles;
     }
 
@@ -30,55 +34,60 @@ public class FileHandler {
         File dataFile = new File("data/wikidata.txt");
         if (!dataFile.exists()) {
             dataFile.createNewFile();
-        }
-        FileWriter fw = new FileWriter(dataFile.getAbsoluteFile());
-        BufferedWriter bw = new BufferedWriter(fw);
-        File dir = new File("data/wiki/");
-        File[] subs = dir.listFiles();
-        List<File> files = new ArrayList<>();
-        List<Article> articles = new ArrayList<Article>();
-        WordFrequencyMap allWords = new WordFrequencyMap();
-        for (File s : subs) {
-            Collections.addAll(files, s.listFiles());
-        }
+            FileWriter fw = new FileWriter(dataFile.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            File dir = new File("data/wiki/");
+            File[] subs = dir.listFiles();
+            List<File> files = new ArrayList<>();
+            List<WikiPage> articles = new ArrayList<WikiPage>();
+            WordFrequencyMap allWords = new WordFrequencyMap();
+            for (File s : subs) {
+                Collections.addAll(files, s.listFiles());
+            }
 
-        for (File f : files) {
-            Article a = new Article(extractArticleName(f.getName()));
-            FileReader reader = new FileReader(f);
-            BufferedReader br = new BufferedReader(reader);
-            String currentLine;
-            WordFrequencyMap wordCount = new WordFrequencyMap();
-            while ((currentLine = br.readLine()) != null) {
-                String[] words = currentLine.split(" ");
-                for (int i = 1; i < words.length; i++) {
-                    String word = words[i];
-                    wordCount.addWord(word, 1);
+            for (File f : files) {
+                WikiPage a = new WikiPage(extractArticleName(f.getName()));
+                FileReader reader = new FileReader(f);
+                BufferedReader br = new BufferedReader(reader);
+                String currentLine;
+                WordFrequencyMap wordCount = new WordFrequencyMap();
+                while ((currentLine = br.readLine()) != null) {
+                    String[] words = currentLine.split(" ");
+                    for (int i = 1; i < words.length; i++) {
+                        String word = words[i];
+                        wordCount.addWord(word, 1);
+                    }
                 }
+                for (String w : wordCount.getWords()) {
+                    a.addWord(w, wordCount.get(w));
+                    allWords.addWord(w, wordCount.get(w));
+                }
+                articles.add(a);
             }
-            for (String w : wordCount.getWords()) {
-                a.addWord(w, wordCount.get(w));
-                allWords.addWord(w, wordCount.get(w));
-            }
-            articles.add(a);
-        }
-        bw.write("Articles ");
-        System.out.println(allWords.getHighestWordCount());
-        System.out.println(allWords.getWords().size());
-        int i = 0;
-        for (String word : allWords.getWords()) {
-            if (allWords.get(word) > 150)
+            bw.write("Articles\t");
+            System.out.println(allWords.getHighestWordCount());
+            System.out.println(allWords.getWords().size());
+            int i = 0;
+            int minCount = 25;
+            System.out.println("Number of words before filtering: " + allWords.getWords().size());
+            allWords.filterWords(minCount);
+            for (String word : allWords.getWords()) {
                 i++;
                 bw.write(word + "\t");
-        }
-        System.out.println("Words with more than 100 counts: " + i);
-        bw.newLine();
-        for (Article a : articles) {
-            bw.write(a.getTitle() + "\t");
-            for (String word : allWords.getWords()) {
-//                bw.write();
             }
+            System.out.println("Number of words after filtering: " + i);
+            bw.newLine();
+            for (WikiPage a : articles) {
+                bw.write(a.getTitle() + "\t");
+                for (String word : allWords.getWords()) {
+                    bw.write(a.get(word) + "\t");
+                }
+                bw.newLine();
+            }
+            bw.close();
+            System.out.println("Finished writing file.");
         }
-        bw.close();
+
     }
 
     private String extractArticleName(String filename) {
