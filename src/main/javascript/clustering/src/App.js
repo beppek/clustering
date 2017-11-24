@@ -42,7 +42,7 @@ class App extends Component {
           <div className="menu">
             <a className="menu-item" onClick={() => this.handleClick('blogs/kmeans')}>Blogs: K-Means</a>
             <a className="menu-item" onClick={() => this.handleClick('blogs/hierarchy')}>Blogs: Hierarchy</a>
-            <a className="menu-item" onClick={() => this.handleClick('wiki/blogs')}>Wikipedia: K-Means</a>
+            <a className="menu-item" onClick={() => this.handleClick('wiki/kmeans')}>Wikipedia: K-Means</a>
             <a className="menu-item" onClick={() => this.handleClick('wiki/hierarchy')}>Wikipedia: Hierarchy</a>
           </div>
         </header>
