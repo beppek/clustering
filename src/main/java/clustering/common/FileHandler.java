@@ -63,11 +63,21 @@ public class FileHandler {
         }
         bw.write("Articles ");
         System.out.println(allWords.getHighestWordCount());
+        System.out.println(allWords.getWords().size());
+        int i = 0;
         for (String word : allWords.getWords()) {
-            bw.write(word + "\t");
+            if (allWords.get(word) > 150)
+                i++;
+                bw.write(word + "\t");
         }
+        System.out.println("Words with more than 100 counts: " + i);
         bw.newLine();
-
+        for (Article a : articles) {
+            bw.write(a.getTitle() + "\t");
+            for (String word : allWords.getWords()) {
+//                bw.write();
+            }
+        }
         bw.close();
     }
 
