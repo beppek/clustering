@@ -11,6 +11,9 @@ import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Class to help test the wikipedia data without running Spring
+ * */
 public class WikiMain {
     public static void main(String[] args) {
         WikiPages pages = new WikiPages();

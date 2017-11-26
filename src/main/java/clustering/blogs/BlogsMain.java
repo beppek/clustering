@@ -14,6 +14,9 @@ import javax.swing.JTree;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
+/**
+ * Java method to test code without running Spring
+ * */
 public class BlogsMain {
     public static void main(String[] args) {
         Blogs blogs = new Blogs();

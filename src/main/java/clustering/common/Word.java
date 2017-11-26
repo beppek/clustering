@@ -1,5 +1,9 @@
 package clustering.common;
 
+
+/**
+ * Class representing a word and the count for that word
+ * */
 public class Word {
     private String word;
     private double count;

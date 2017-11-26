@@ -6,6 +6,9 @@ import clustering.common.Pearson;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class representing a Hierarchical clustering of data
+ * */
 public class Hierarchy {
     private List<Cluster> clusters;
     private List<Article> articles;
@@ -25,12 +28,9 @@ public class Hierarchy {
         return clusters.get(0);
     }
 
-    public void generate() {
-        while (clusters.size() > 1) {
-            iterate();
-        }
-    }
-
+    /**
+     * Initialize all articles as single clusters
+     * */
     private void init() {
         clusters = new ArrayList<Cluster>();
         for (Article a : articles) {
@@ -38,6 +38,18 @@ public class Hierarchy {
         }
     }
 
+    /**
+     * Start merging clusters until there is only one left
+     * */
+    public void generate() {
+        while (clusters.size() > 1) {
+            iterate();
+        }
+    }
+
+    /**
+     * Iterate over the clusters to merge similar clusters
+     * */
     private void iterate() {
         double closest = Double.MAX_VALUE;
         Cluster bestA = null;

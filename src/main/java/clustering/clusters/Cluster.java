@@ -3,6 +3,9 @@ package clustering.clusters;
 import clustering.common.Article;
 import clustering.common.Word;
 
+/**
+ * Class representing a cluster of Articles
+ * */
 public class Cluster {
     private Cluster parent;
     private Cluster left = null;
@@ -18,10 +21,6 @@ public class Cluster {
         setArticle(a);
     }
 
-    Cluster(String vec, Cluster left, Cluster right, double distance, String id) {
-
-    }
-
     void setParent(Cluster p) {
         this.parent = p;
     }
@@ -33,6 +32,7 @@ public class Cluster {
     public boolean hasLeft() {
         return left != null;
     }
+
     void setLeft(Cluster left) {
         this.left = left;
     }
@@ -65,6 +65,10 @@ public class Cluster {
         this.article = a;
     }
 
+    /**
+     * Merges 2 clusters
+     * Distance is set on parent to show how close the merged clusters are
+     * */
     Cluster merge(Cluster oc, double distance) {
         Cluster p = new Cluster();
         p.setLeft(this);

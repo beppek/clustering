@@ -3,7 +3,9 @@ package clustering.wiki;
 import clustering.common.Article;
 import clustering.common.WordFrequencyMap;
 
-
+/**
+ * Class representing a Wikipedia page with the words in the article and the frequency of those words
+ * */
 public class WikiPage extends Article {
     private WordFrequencyMap words;
 

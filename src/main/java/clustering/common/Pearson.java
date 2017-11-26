@@ -1,6 +1,12 @@
 package clustering.common;
 
+/**
+ * Class to calculate Pearson similarity of two articles
+ * */
 public class Pearson {
+    /**
+     * @return double representing the score of the comparison between two articles. 1.0 is a perfect score
+     * */
     public double calculate(Article a, Article b) {
         double sumA = 0;
         double sumAsq = 0;

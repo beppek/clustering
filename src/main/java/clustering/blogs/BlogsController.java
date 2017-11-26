@@ -12,11 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Java Spring Controller for blogs routes
+ * */
 @RestController
 @CrossOrigin()
 @RequestMapping("/blogs")
 public class BlogsController {
 
+    /**
+     * Returns a HTML string representation of the k-means clustering of the blog data
+     * */
     @RequestMapping("/kmeans")
     public String kClusters(@RequestParam(value="k", defaultValue = "4") String stringK) {
         int k = Integer.parseInt(stringK);
@@ -29,10 +35,12 @@ public class BlogsController {
         KMeans kMeans = new KMeans(blogs.getBlogs());
         kMeans.generate(k);
         HTMLBuilder builder = new HTMLBuilder();
-        String html = builder.buildKMeansHTML(kMeans.getCentroids());
-        return html;
+        return builder.buildKMeansHTML(kMeans.getCentroids());
     }
 
+    /**
+     * Returns a HTML string tree representation of hierarchical clustering of the data
+     * */
     @RequestMapping("/hierarchy")
     public String hierarchy() {
         Blogs blogs = new Blogs();

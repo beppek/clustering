@@ -4,6 +4,9 @@ import clustering.clusters.Centroid;
 
 import java.util.List;
 
+/**
+ * Class to build html representation of the k-means clusters
+ * */
 public class HTMLBuilder {
     public String buildKMeansHTML(List<Centroid> centroids) {
         StringBuilder sb = new StringBuilder();

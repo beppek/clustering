@@ -3,6 +3,9 @@ package clustering.common;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class representing an article with words for analyzing
+ * */
 public class Article {
     private String title;
     private List<Word> words = new ArrayList<Word>();

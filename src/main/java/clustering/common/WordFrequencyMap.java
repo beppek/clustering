@@ -3,6 +3,9 @@ package clustering.common;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Class to handle word frequency with filtering based on common words
+ * */
 public class WordFrequencyMap {
     private Map<String, Integer> words = new HashMap<>();
     private Set<String> filteredWords;
@@ -33,6 +36,11 @@ public class WordFrequencyMap {
         return words.get(w);
     }
 
+    /**
+     * Eliminates the most common words as they would be found in all articles.
+     * Also eliminates the least common words which might be junk words or words that have little bearing on the classification of the data since they are not used enough
+     * @param minCount - integer representing the minimum number of times a word should appear. Lower counts get eliminated from the data set.
+     * */
     public void filterWords(int minCount) {
         int max = (int) (words.size() * 0.7);
         int min = (int) (words.size() * 0.4);
@@ -77,6 +85,9 @@ public class WordFrequencyMap {
         return words.containsKey(word);
     }
 
+    /**
+     * Run a word through the filter to see if it is contained in the list of junk words
+     * */
     private boolean passFilter(String w) {
         return w.length() > 2 && !filteredWords.contains(w);
     }

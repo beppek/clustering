@@ -6,6 +6,9 @@ import clustering.common.Pearson;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class representing the K-Means ordering of clusters
+ * */
 public class KMeans {
     private List<Centroid> centroids;
     private List<Article> articles;
@@ -20,6 +23,12 @@ public class KMeans {
         return centroids;
     }
 
+    /**
+     * Generates the K-Means clustering based on k.
+     * Centroids are created from random articles in the list.
+     * Iterates over the articles until the centroids are set and current assignment matches the previous one.
+     * @param k - int representing the number of centroids to organize k-means clustering from
+     * */
     public void generate(int k) {
         centroids = new ArrayList<Centroid>();
         Randomizer rnd = new Randomizer(articles);
@@ -43,6 +52,9 @@ public class KMeans {
         System.out.println("Iterations: " + cnt + ", Centroids: " + centroids.size() + "\n\n");
     }
 
+    /**
+     * Iterates over the articles to find the best matching centroid for each article
+     * */
     private void iterate() {
         resetCentroids();
         for (Article a : articles) {
@@ -59,6 +71,9 @@ public class KMeans {
         }
     }
 
+    /**
+     * Resets the centroids by saving the last assignment for each centroid for future comparison
+     * */
     private void resetCentroids() {
         for (Centroid c : centroids) {
             c.saveLast();

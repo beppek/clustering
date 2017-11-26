@@ -7,6 +7,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to build HTML and JTree representations of the Hierarchical clustering
+ * */
 public class TreeBuilder {
     private List<String> html;
     private Cluster root;
@@ -15,6 +18,9 @@ public class TreeBuilder {
         this.root = root;
     }
 
+    /**
+     * @return string with html representation of the hierarchy
+     * */
     public String buildHTMLTree() {
         html = new ArrayList<String>();
         html.add("<ul>");
@@ -28,6 +34,9 @@ public class TreeBuilder {
         return sb.toString();
     }
 
+    /**
+     * Recursively add the nodes
+     * */
     private void addHTMLNodes(int i, Cluster c) {
         if (c.hasRight()) {
             String art = c.getRight().toString();
@@ -54,6 +63,9 @@ public class TreeBuilder {
         }
     }
 
+    /**
+     * Build the JTree representation of the hierarchy
+     * */
     public JTree buildJTree() {
         DefaultMutableTreeNode top = new DefaultMutableTreeNode(root.toString());
         jTreeAddNodes(top, root);
@@ -64,6 +76,9 @@ public class TreeBuilder {
         return tree;
     }
 
+    /**
+     * Recursively add nodes
+     * */
     private void jTreeAddNodes(DefaultMutableTreeNode tnode, Cluster c) {
         if (c.hasLeft()) {
             DefaultMutableTreeNode nNode = new DefaultMutableTreeNode(c.getLeft().toString());

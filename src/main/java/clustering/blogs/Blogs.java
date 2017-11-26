@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents blogs read from a file of data
+ * */
 class Blogs {
     private List<Article> blogs = new ArrayList<Article>();
 
@@ -18,6 +21,9 @@ class Blogs {
         blogs = fileHandler.readFileData("data/blogdata.txt");
     }
 
+    /**
+     * @return List of blogs read from file
+     * */
     List<Article> getBlogs() {
         return blogs;
     }

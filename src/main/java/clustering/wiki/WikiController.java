@@ -12,11 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Java Spring Controller for wiki routes
+ * */
 @RestController
 @CrossOrigin()
 @RequestMapping("/wiki")
 public class WikiController {
 
+    /**
+     * Gets K-Means clustering for the wikipedia data
+     * */
     @RequestMapping("/kmeans")
     public String kClusters(@RequestParam(value="k", defaultValue = "4") String stringK) {
         int k = Integer.parseInt(stringK);
@@ -34,6 +40,9 @@ public class WikiController {
         return html;
     }
 
+    /**
+     * Gets hierarchical clustering for the wikipedia data
+     * */
     @RequestMapping("/hierarchy")
     public String hierarchy() {
         WikiPages pages = new WikiPages();
