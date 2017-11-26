@@ -18,11 +18,11 @@ converter.registerComponent('test', Test);
 class App extends Component {
 
   state = {
-    content: "To get started, select information to cluster from the menu above, then select the cluster type you wish to display."
+    content: "To get started, select information to cluster from the menu above, then select the cluster type you wish to display.",
+    k: 4
   };
 
   handleClick = (path) => {
-    console.log(path);
     Request
       .get(apiRoot+path)
       .end((err, res) => {
@@ -34,15 +34,31 @@ class App extends Component {
       });
   }
 
+  kmeans = (path) => {
+    this.handleClick(`${path}?k=${this.state.k}`);
+  }
+
+  handleChange = (e) => {
+    this.setState({k:e.target.value});
+  }
+
   render() {
 
     return (
       <div className="App">
         <header className="App-header">
           <div className="menu">
-            <a className="menu-item" onClick={() => this.handleClick('blogs/kmeans')}>Blogs: K-Means</a>
+            <label htmlFor="kNum">Select k number:</label>
+            <select value={this.state.k} id="kNum" onChange={this.handleChange}>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+            <a className="menu-item" onClick={() => this.kmeans('blogs/kmeans')}>Blogs: K-Means</a>
+            <a className="menu-item" onClick={() => this.kmeans('wiki/kmeans')}>Wikipedia: K-Means</a>
             <a className="menu-item" onClick={() => this.handleClick('blogs/hierarchy')}>Blogs: Hierarchy</a>
-            <a className="menu-item" onClick={() => this.handleClick('wiki/kmeans')}>Wikipedia: K-Means</a>
             <a className="menu-item" onClick={() => this.handleClick('wiki/hierarchy')}>Wikipedia: Hierarchy</a>
           </div>
         </header>
