@@ -38,7 +38,7 @@ public class FileHandler {
             BufferedWriter bw = new BufferedWriter(fw);
             File dir = new File("data/wiki/");
             File[] subs = dir.listFiles();
-            List<File> files = new ArrayList<>();
+            List<File> files = new ArrayList<File>();
             List<WikiPage> articles = new ArrayList<WikiPage>();
             WordFrequencyMap allWords = new WordFrequencyMap();
             for (File s : subs) {
