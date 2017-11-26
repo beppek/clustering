@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class to handle the wikipedia data 
+ * Class to handle the wikipedia data
  * */
 public class WikiPages {
     private List<Article> pages = new ArrayList<Article>();

@@ -1,13 +1,16 @@
-package clustering.common;
+package clustering.clusters;
+
+import clustering.common.Article;
+import clustering.common.Word;
 
 /**
  * Class to calculate Pearson similarity of two articles
  * */
-public class Pearson {
+class Pearson {
     /**
      * @return double representing the score of the comparison between two articles. 1.0 is a perfect score
      * */
-    public double calculate(Article a, Article b) {
+    double calculate(Article a, Article b) {
         double sumA = 0;
         double sumAsq = 0;
         for (Word w : a.getWords()) {

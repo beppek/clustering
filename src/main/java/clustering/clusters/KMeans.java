@@ -1,7 +1,6 @@
 package clustering.clusters;
 
 import clustering.common.Article;
-import clustering.common.Pearson;
 
 import java.util.ArrayList;
 import java.util.List;
